@@ -64,6 +64,12 @@ const flowAhorcado = addKeyword(['Ahorcado']).
             let letter = ctx.body
 
             letter = letter.toLowerCase()
+            if (letter === STATE_APP[ctx.from].randomWord) {
+                STATE_APP[ctx.from].state = 'not_playing'
+                await flowDynamic([{ body: `¡Felicidades! Has adivinado la palabra "*${STATE_APP[ctx.from].randomWord}*" en ${STATE_APP[ctx.from].attempts} intentos` }]);
+                await gotoFlow(flowPrincipal);
+                return;
+            }
 
             if (letter.length > 1) {
                 await flowDynamic([{ body: 'Solo puede digitar una letra' }]);
@@ -77,6 +83,8 @@ const flowAhorcado = addKeyword(['Ahorcado']).
                 await fallBack();
                 return;
             }
+
+
 
             let hiddenWord = STATE_APP[ctx.from]?.hiddenWord ?? '';
             let randomWord = STATE_APP[ctx.from]?.randomWord ?? '';
@@ -123,11 +131,12 @@ const flowAhorcado = addKeyword(['Ahorcado']).
 
 
 const flowPrincipal = addKeyword(EVENTS.WELCOME)
-    .addAnswer('🙌 Hola bienvenido a este *Chatbot*')
     .addAnswer([
-        'Selecione la opción a realizar',
-        '   👉 *Ahorcado* Para Jugar.'
-    ],
+        '🙌 Hola bienvenido a este *Chatbot*',
+        '  👉 *Ahorcado* Para Jugar.',
+        '\nEscriba la opción que esta en negrilla para continuar, en caso que no salgan los botones.'
+    ])
+    .addAnswer(['o selecione la opción'],
         { buttons: [{ body: 'Ahorcado' }], },
         (ctx) => {
             STATE_APP[ctx.from] = { ...STATE_APP[ctx.from], name: ctx.pushName ?? ctx.from };
