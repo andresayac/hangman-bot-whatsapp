@@ -49,10 +49,6 @@ const flowAhorcado = addKeyword(['Ahorcado']).
                 STATE_APP[ctx.from].errorList = []
                 STATE_APP[ctx.from].successList = []
 
-                console.log(STATE_APP[ctx.from])
-                console.log(STATE_APP)
-
-
                 await flowDynamic([
                     { body: `Hola ${ctx.pushName}` },
                     { body: `Tu palabra tiene una longitud de ${hiddenWord.length / 2} letras` },
