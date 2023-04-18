@@ -36,7 +36,7 @@ const flowAhorcado = addKeyword(['Ahorcado']).
         ],
         { capture: true },
         async (ctx, { fallBack, flowDynamic, gotoFlow }) => {
-            if (ctx.body === 'jugar') {
+            if (ctx.body.toLowerCase().trim() === 'jugar') {
 
                 let randomIndex = Math.floor(Math.random() * words.length);
                 let randomWord = words[randomIndex];
@@ -54,16 +54,18 @@ const flowAhorcado = addKeyword(['Ahorcado']).
                     { body: `Tu palabra tiene una longitud de ${hiddenWord.length / 2} letras` },
                     { body: `Indicio: ${hiddenWord}` },
                 ]);
+                return;
             }
 
+            await gotoFlow(flowPrincipal);
 
         },
     )
     .addAnswer('Digite una letra', { capture: true },
         async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow }) => {
-            let letter = ctx.body
+            let letter = ctx.body.toLowerCase().trim() 
+           
 
-            letter = letter.toLowerCase()
             if (letter === STATE_APP[ctx.from].randomWord) {
                 STATE_APP[ctx.from].state = 'not_playing'
                 await flowDynamic([{ body: `¡Felicidades! Has adivinado la palabra "*${STATE_APP[ctx.from].randomWord}*" en ${STATE_APP[ctx.from].attempts} intentos` }]);
