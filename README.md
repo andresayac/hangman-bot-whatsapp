@@ -1,40 +1,12 @@
 ### CHATBOT Whatsapp (Baileys Provider)
 
-<p align="center">
-  <img width="300" src="https://i.imgur.com/Oauef6t.png">
-</p>
+
+**Hangman - Ahorcado,** El juego del ahorcado es un juego de adivinanza de palabras en el que un jugador intenta adivinar una palabra seleccionada al azar por otro jugador. El jugador tiene un número limitado de intentos para adivinar la palabra antes de que se complete un dibujo de un hombre ahorcado. Por cada intento incorrecto, se añade una parte más al dibujo. Si el jugador completa el dibujo antes de adivinar la palabra, pierde. Si el jugador adivina la palabra antes de completar el dibujo, gana. **[Ver más informacion](https://es.wikipedia.org/wiki/Ahorcado_(juego)/)**
 
 
-**Con esta librería, puedes construir flujos automatizados de conversación de manera agnóstica al proveedor de WhatsApp,** configurar respuestas automatizadas para preguntas frecuentes, recibir y responder mensajes de manera automatizada, y hacer un seguimiento de las interacciones con los clientes.  Además, puedes configurar fácilmente disparadores que te ayudaran a expandir las funcionalidades sin límites. **[Ver más informacion](https://bot-whatsapp.netlify.app/)**
-
-```js
-const main = async () => {
-    const adapterDB = new MockAdapter()
-    const adapterFlow = createFlow([flowPrincipal])
-
-    const adapterProvider = createProvider(BaileysProvider, {
-        accountSid: process.env.ACC_SID,
-        authToken: process.env.ACC_TOKEN,
-        vendorNumber: process.env.ACC_VENDOR,
-    })
-
-    createBot({
-        flow: adapterFlow,
-        provider: adapterProvider,
-        database: adapterDB,
-    })
-}
-```
-
+#### Desplegar Codigo del CHATBOT 
 ```
 npm install
 npm start
 ```
-
----
-## Recursos
-- [📄 Documentación](https://bot-whatsapp.netlify.app/)
-- [🚀 Roadmap](https://github.com/orgs/codigoencasa/projects/1)
-- [💻 Discord](https://link.codigoencasa.com/DISCORD)
-- [👌 Twitter](https://twitter.com/leifermendez)
-- [🎥 Youtube](https://www.youtube.com/watch?v=5lEMCeWEJ8o&list=PL_WGMLcL4jzWPhdhcUyhbFU6bC0oJd2BR)
+Para utilizar el chatbot, escanea el código **QR** como si estuvieras ingresando a WhatsApp Web y luego escribe al número de WhatsApp donde se encuentra ejecutándose. Una vez dentro del chat, sigue las instrucciones que te indique el chatbot.
